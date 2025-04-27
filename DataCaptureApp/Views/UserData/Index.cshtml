@@ -1,0 +1,62 @@
+@model DataCaptureApp.Models.UserData
+
+<h2>Data Entry Form</h2>
+
+<form method="post" asp-action="SaveData">
+    <label>Name:</label>
+    <input type="text" name="Name" required />
+    <br /><br />
+    <label>Phone Number:</label>
+    <input type="text" name="PhoneNumber" required />
+    <br /><br />
+    <label>Address:</label>
+    <input type="text" name="Address" required />
+    <br /><br />
+    <label>Postcode:</label>
+    <input type="text" name="Postcode" required />
+    <br /><br />
+    <button type="submit">Save</button>
+</form>
+
+<br />
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<button id="readButton" class="btn btn-primary">Read</button>
+
+<div id="latestUserData" style="display: none;">
+    <h3>Latest User Data</h3>
+    <p id="name"></p>
+    <p id="phone"></p>
+    <p id="address"></p>
+    <p id="postcode"></p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript">
+    $("#readButton").click(function () {
+        $.ajax({
+            url: '@Url.Action("ReadData", "UserData")',
+            type: 'GET',
+            success: function (data) {
+                if (data) {
+                    $("#name").text("Name: " + data.name);
+                    $("#phone").text("Phone: " + data.phoneNumber);
+                    $("#address").text("Address: " + data.address);
+                    $("#postcode").text("Postcode: " + data.postcode);
+                    
+                    $("#latestUserData").show();
+                }
+            },
+            error: function () {
+                alert("Error loading data.");
+            }
+        });
+    });
+</script>
