@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DataCaptureApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+37311408106fc43c57a14d30416bbff7c3905c71")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+02ef8c39814dfd89909885f77421856cc11725a8")]
 [assembly: System.Reflection.AssemblyProductAttribute("DataCaptureApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DataCaptureApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

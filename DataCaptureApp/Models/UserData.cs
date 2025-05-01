@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace DataCaptureApp.Models
 {
@@ -21,6 +22,8 @@ namespace DataCaptureApp.Models
         [RegularExpression(@"^(GIR\s?0AA|[A-PR-UWYZ][A-HK-Y]?[0-9][0-9A-HJKS-UW]? ?[0-9][ABD-HJLNP-UW-Z]{2})$",
             ErrorMessage = "Invalid postcode")]
         public required string Postcode { get; set; }
+
+        [JsonIgnore]
         public string? SerializedJson { get; set; }
 
     }
