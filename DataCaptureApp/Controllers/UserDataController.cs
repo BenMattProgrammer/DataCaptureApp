@@ -15,28 +15,56 @@ public class UserDataController : Controller
     {
         var latestUserData = _context.UserData.OrderByDescending(u => u.Id).FirstOrDefault();
         return View(latestUserData);
+
     }
 
     [HttpPost]
     public IActionResult SaveData(UserData userData)
     {
+        Console.WriteLine(ModelState);
         if (ModelState.IsValid)
         {
-            _context.UserData.Add(userData);
-            _context.SaveChanges();
+            try
+            {
+                string serialized = System.Text.Json.JsonSerializer.Serialize(userData);
 
-            TempData["SuccessMessage"] = "Data has been saved successfully!";
-            return RedirectToAction("Index");
+                userData.SerializedJson = serialized;
+
+                _context.UserData.Add(userData);
+                _context.SaveChanges();
+
+                TempData["SuccessMessage"] = "Data has been saved successfully!";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $"Error saving data: {ex.Message}");
+            }
         }
 
         return View("Index", userData);
     }
 
+
     [HttpGet]
     public IActionResult ReadData()
     {
-        var latestUserData = _context.UserData.OrderByDescending(u => u.Id).FirstOrDefault();
+        try
+        {
+            var latestUserData = _context.UserData
+                .OrderByDescending(u => u.Id)
+                .FirstOrDefault();
 
-        return Json(latestUserData);
+            if (latestUserData == null)
+            {
+                return NotFound("No user data found.");
+            }
+
+            return Json(latestUserData);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Error retrieving data: {ex.Message}");
+        }
     }
 }

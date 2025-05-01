@@ -1,24 +1,37 @@
 @model DataCaptureApp.Models.UserData
 
+@{
+    ViewData["Title"] = "Data Entry Form";
+}
+
 <h2>Data Entry Form</h2>
 
-<form method="post" asp-action="SaveData">
+<form method="post" asp-controller="UserData" asp-action="SaveData">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <label>Name:</label>
-    <input type="text" name="Name" required />
+    <input type="text" asp-for="Name" />
+    <span asp-validation-for="Name" class="text-danger"></span>
     <br /><br />
+
     <label>Phone Number:</label>
-    <input type="text" name="PhoneNumber" required />
+    <input type="text" asp-for="PhoneNumber" />
+    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     <br /><br />
+
     <label>Address:</label>
-    <input type="text" name="Address" required />
+    <input type="text" asp-for="Address" />
+    <span asp-validation-for="Address" class="text-danger"></span>
     <br /><br />
+
     <label>Postcode:</label>
-    <input type="text" name="Postcode" required />
+    <input type="text" asp-for="Postcode" />
+    <span asp-validation-for="Postcode" class="text-danger"></span>
     <br /><br />
+
     <button type="submit">Save</button>
+    <br /><br />
 </form>
 
-<br />
 
 @if (TempData["SuccessMessage"] != null)
 {
@@ -37,26 +50,27 @@
     <p id="postcode"></p>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script type="text/javascript">
-    $("#readButton").click(function () {
-        $.ajax({
-            url: '@Url.Action("ReadData", "UserData")',
-            type: 'GET',
-            success: function (data) {
-                if (data) {
-                    $("#name").text("Name: " + data.name);
-                    $("#phone").text("Phone: " + data.phoneNumber);
-                    $("#address").text("Address: " + data.address);
-                    $("#postcode").text("Postcode: " + data.postcode);
-                    
-                    $("#latestUserData").show();
+    <script type="text/javascript">
+        $("#readButton").click(function () {
+            $.ajax({
+                url: '@Url.Action("ReadData", "UserData")',
+                type: 'GET',
+                success: function (data) {
+                    if (data) {
+                        $("#name").text("Name: " + data.name);
+                        $("#phone").text("Phone: " + data.phoneNumber);
+                        $("#address").text("Address: " + data.address);
+                        $("#postcode").text("Postcode: " + data.postcode);
+                        $("#latestUserData").show();
+                    }
+                },
+                error: function () {
+                    alert("Error loading data.");
                 }
-            },
-            error: function () {
-                alert("Error loading data.");
-            }
+            });
         });
-    });
-</script>
+    </script>
+}

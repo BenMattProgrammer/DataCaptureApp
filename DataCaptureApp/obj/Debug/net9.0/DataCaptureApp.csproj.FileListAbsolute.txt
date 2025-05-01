@@ -227,3 +227,4 @@ C:\Users\lenovo\Desktop\t2\DataCaptureApp\obj\Debug\net9.0\DataCaptureApp.genrun
 C:\Users\lenovo\Desktop\t2\DataCaptureApp\obj\Debug\net9.0\ref\DataCaptureApp.dll
 C:\Users\lenovo\Desktop\t2\DataCaptureApp\obj\Debug\net9.0\compressed\b0yj08ahz1-yw855rstni.gz
 C:\Users\lenovo\Desktop\t2\DataCaptureApp\obj\Debug\net9.0\compressed\5s3hi39yay-yw855rstni.gz
+C:\Users\lenovo\Desktop\t2\DataCaptureApp\obj\Debug\net9.0\DataCaptureApp.sourcelink.json
